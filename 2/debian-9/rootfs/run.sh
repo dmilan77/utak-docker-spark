@@ -29,3 +29,10 @@ if am_i_root; then
 else
     exec "$EXEC" "${ARGS[@]}"
 fi
+
+if [ "$SPARK_MODE" == "master" ]; then
+    # Master constants
+    EXEC=$(command -v start-livy.sh)
+    ARGS=()
+    info "** Starting livy in master mode **"
+fi

@@ -1,5 +1,6 @@
-#FROM debian:stretch-20190812
-FROM ubuntu:18.04
+#FROM ubuntu:disco-20190913
+FROM debian:stretch-20190812
+#FROM ubuntu:18.04
 RUN apt update -y
 RUN apt install wget curl software-properties-common  openjdk-8-jdk -y
 RUN apt install unzip supervisor -y

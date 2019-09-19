@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: utak-spark-02-worker
+  labels:
+    app.kubernetes.io/name: spark
+    helm.sh/chart: spark-1.0.4
+    app.kubernetes.io/instance: utak-spark-02
+    app.kubernetes.io/managed-by: Tiller
+    app.kubernetes.io/component: worker
+spec:
+  serviceName: utak-spark-02-headless
+  replicas: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: spark
+      app.kubernetes.io/instance: utak-spark-02
+      app.kubernetes.io/component: worker
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: spark
+        app.kubernetes.io/instance: utak-spark-02
+        helm.sh/chart: spark-1.0.4
+        app.kubernetes.io/component: worker
+    spec:
+      
+      securityContext:
+        fsGroup: 1001
+        runAsUser: 1001
+      containers:
+        - name: spark-worker
+          image: "dmilan/utak-docker-spark:latest"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8081
+              protocol: TCP
+          volumeMounts:
+          env:
+          - name: SPARK_MODE
+            value: "worker"
+          - name: SPARK_DAEMON_MEMORY
+            value: 
+          ## There are some environment variables whose existence needs
+          ## to be checked because Spark checks if they are null instead of an
+          ## empty string
+          - name: SPARK_WORKER_WEBUI_PORT
+            value: "8081"
+          - name: SPARK_DAEMON_JAVA_OPTS
+            value: 
+          - name: SPARK_MASTER_URL
+            value: spark://utak-spark-02-master-svc:7077
+          # If you use a custom properties file, it must be loaded using a ConfigMap
+          - name: SPARK_WORKER_OPTS
+            value: 
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8081
+            initialDelaySeconds: 180
+            periodSeconds: 20
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 6
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8081
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 6
+          resources:
+            null
+            
+      volumes:

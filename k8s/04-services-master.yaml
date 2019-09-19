@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: utak-spark-02-master-svc
+  labels:
+    app.kubernetes.io/name: spark
+    helm.sh/chart: spark-1.0.4
+    app.kubernetes.io/instance: utak-spark-02
+    app.kubernetes.io/managed-by: Tiller
+  annotations:
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 7077
+    targetPort: cluster
+    name: cluster
+  - port: 80
+    targetPort: http
+    name: http
+    protocol: TCP
+  - port: 8998
+    targetPort: 8998
+    name: livy
+    protocol: TCP
+  selector:
+    app.kubernetes.io/name: spark
+    app.kubernetes.io/instance: utak-spark-02
+    app.kubernetes.io/component: master

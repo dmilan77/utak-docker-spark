@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: utak-spark-02-headless
+  labels:
+    app.kubernetes.io/name: spark
+    app.kubernetes.io/instance: utak-spark-02
+    app.kubernetes.io/managed-by: Tiller
+spec:
+  type: ClusterIP
+  clusterIP: None
+  selector:
+    app.kubernetes.io/name: spark
+    release: "utak-spark-02"

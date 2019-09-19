@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: utak-spark-02-jupyter-sparkmagic-deployment
+  labels:
+    app: utak-spark-02-jupyter-sparkmagic
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: utak-spark-02-jupyter-sparkmagic
+  template:
+    metadata:
+      labels:
+        app: utak-spark-02-jupyter-sparkmagic
+    spec:
+      containers:
+      - name: utak-spark-02-jupyter-sparkmagic
+        image: dmilan/jupyter-sparkmagic:latest
+        imagePullPolicy: IfNotPresent
+        env:
+            - name: LIVY_HOST
+              value: utak-spark-02-master-svc
+        ports:
+        - containerPort: 8888
+ 

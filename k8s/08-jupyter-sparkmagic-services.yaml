@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: utak-spark-02-jupyter-sparkmagic-svc
+spec:
+  type: LoadBalancer
+  selector:
+    app: utak-spark-02-jupyter-sparkmagic
+  ports:
+    - protocol: TCP
+      port: 8888
+      targetPort: 8888

@@ -29,8 +29,8 @@ spec:
         runAsUser: 1001
       containers:
         - name: spark-master
-          #image: "docker.io/dmilan/utak-docker-spark:2.44-r1"
-          image: "dmilan/utak-docker-spark"
+          image: "docker.io/dmilan/utak-docker-spark:2.44-r1"
+          #image: "dmilan/utak-docker-spark"
           imagePullPolicy: IfNotPresent
           ports:
             - name: http

@@ -16,6 +16,7 @@ RUN curl  -OJL  https://www-us.apache.org/dist/incubator/livy/$LIVY_VERSION/apac
 RUN tar xf spark-${SPARK_VERSION}-bin-hadoop2.7.tgz
 RUN unzip apache-livy-$LIVY_VERSION-bin.zip
 USER root
+COPY .cachebust /opt/
 RUN ln -s /opt/spark-${SPARK_VERSION}-bin-hadoop2.7 /opt/spark
 RUN ln -s /opt/apache-livy-$LIVY_VERSION-bin /opt/livy
 RUN mkdir /opt/livy/logs /opt/scripts

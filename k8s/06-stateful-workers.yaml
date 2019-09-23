@@ -30,7 +30,7 @@ spec:
         runAsUser: 1001
       containers:
         - name: spark-worker
-          image: "dmilan/utak-docker-spark:latest"
+          image: "dmilan/utak-docker-spark:2.4.4-r2"
           imagePullPolicy: IfNotPresent
           ports:
             - name: http

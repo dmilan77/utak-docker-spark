@@ -29,7 +29,7 @@ spec:
         runAsUser: 1001
       containers:
         - name: spark-master
-          image: "gcr.io/utak-236419/utak-docker-spark:2.4.4-r2"
+          image: "dmilan/utak-docker-spark:latest"
           #image: "dmilan/utak-docker-spark"
           imagePullPolicy: IfNotPresent
           ports:

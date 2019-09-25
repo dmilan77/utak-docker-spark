@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set +x
-export TAG=2.4.4-r2.2
+export TAG=2.4.4-r2.3
 export SPARK_VERSION=2.4.4
 export LIVY_VERSION=0.6.0-incubating
 export GCR_PROJECT_ID=utak-236419

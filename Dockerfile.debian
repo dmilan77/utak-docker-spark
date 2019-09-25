@@ -14,7 +14,7 @@ RUN curl  -OJL  https://www-us.apache.org/dist/spark/spark-${SPARK_VERSION}/spar
 RUN tar xf spark-${SPARK_VERSION}-bin-hadoop2.7.tgz
 RUN mv spark-${SPARK_VERSION}-bin-hadoop2.7 spark
 RUN curl  -OJL  https://www-us.apache.org/dist/incubator/livy/$LIVY_VERSION/apache-livy-$LIVY_VERSION-bin.zip
-RUN unzip apache-livy-$LIVY_VERSION-bin.zip
+RUN unzip -qq apache-livy-$LIVY_VERSION-bin.zip
 RUN mv apache-livy-$LIVY_VERSION-bin livy
 ENV SPARK_HOME=/opt/spark
 RUN curl  -JL https://storage.googleapis.com/hadoop-lib/gcs/gcs-connector-latest-hadoop2.jar -o $SPARK_HOME/jars/gcs-connector-latest-hadoop2.jar
